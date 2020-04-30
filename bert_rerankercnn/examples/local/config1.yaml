@@ -1,0 +1,37 @@
+batch_size: 1
+accumulate_grad_batches: 1
+
+train_file: '../bert_reranker/bert_reranker/data/natq_train.json'
+dev_files:
+  dev_file_1: '../bert_reranker/bert_reranker/data/healthtap_dev.json'
+  dev_file_2: '../bert_reranker/bert_reranker/data/faq_dev.json'
+  dev_file_3: '../bert_reranker/bert_reranker/data/natq_dev.json'
+test_file: '../bert_reranker/bert_reranker/data/faq_dev.json'
+cache_folder: '../bert_reranker/bert_reranker/data/cached_natq'
+tokenizer_name: 'bert-base-uncased'
+
+model:
+  name: 'bert_ffw'
+  bert_base: 'bert-base-uncased'
+  freeze_bert: true
+  layers_pre_pooling: []
+  layers_post_pooling: []
+  retriever_layer_sizes: [256]
+  dropout: 0.0
+  pooling_type: 'avg'
+  normalize_model_result: false
+  dropout_bert: null
+
+loss_type: 'classification'
+
+optimizer:
+  name: 'adamw'
+  lr: 0.001
+
+max_question_len: 30
+max_paragraph_len: 512
+patience: 75
+gradient_clipping: 0
+precision: 32
+seed: 1234
+max_epochs: 1
